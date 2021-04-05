@@ -1,6 +1,7 @@
 @media only screen and (max-width: 480px){
     body{
         height: 660px;
+        width: 100%;
         background-color: rgb(190, 190, 190);
     }
     header{
@@ -17,20 +18,16 @@
         
     }
     .header-nav{
-        /* background-color: slateblue; */
-        /* margin: 10px; */
         float: left;
         font-size: large;
     }
     .button1{
-        /* margin-left: 50%; */
         float: right;
     }
 
     .new-header{
         width: 100%;
         height: 40px;
-        /* background-color: seagreen; */
         margin-top: 0%;
         display: inline-block;
         clear: both;
@@ -42,7 +39,6 @@
 
     .container{
         display: flex;
-        /* background-color: slategrey; */
         align-items: center;
     }
 
@@ -56,16 +52,15 @@
     }
     input{
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 3px;
 
     }
     label{
         padding: 10px;
         background-color: rgb(96, 102, 104);
         position: relative;
-        right: 25px;
         font-family: Arial, Helvetica, sans-serif;
-        border-radius: 10px;
+        border-radius: 3px;
 
     }
     span{
@@ -89,7 +84,6 @@
         height: 50px;
         background-color: black;
         clear: both;
-        /* width: 100%; */
         margin-top: 60%;
         display: flex;
         align-items: center;
@@ -115,5 +109,35 @@
     footer :nth-child(4){
         margin-left: 25%;
         margin-right: 15px;
+    }
+    .co{
+        width: 100%;
+        height: 40px;
+        margin-top: 0%;
+        display: inline-block;
+        clear: both;
+        text-align: center;
+        font-size: medium;
+        padding-top: 10px;
+        background-color: rgb(92, 91, 91);
+    }
+
+    .container-show{
+        
+        margin-top:50px;
+        width: 300px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .container-show img {
+        width: 200px;
+        height: 200px;
+    }
+    .container-show h3 {
+        text-align: center;
+        font-size: x-large;
     }
 }
