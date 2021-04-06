@@ -159,5 +159,103 @@
         position: relative;
         left: 195px;
     }
+    .updetailbtn{
+        position: relative;
+        right: 200px;
+        top: 20px;
+        background-color: black;
+        border-radius: 5px;
+        width: 20%;
+        height: 35px;
+        padding-top: 5px;
+        padding-bottom: 10px;
+
+    }
+    .updetailbtn a{
+        color: white;
+        text-decoration: none;
+    }
+    .dledetailbtn{
+        position: relative;
+        left: 190px;
+        bottom: 15px;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        width: 340%;
+        height: 70%;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        /* margin-bottom: 10px; */
+    }
+    p{
+        background-color: rgba(204, 203, 203, 0.815);
+        width: 70%;
+        text-align: center;
+        font-weight: 80px;
+        word-wrap: break-word;
+        margin-top: 20px;
+        line-height: 1.6;
+        padding: 5px;
+        margin-bottom: 10px;
+        
+    }
+    .imgdet{
+        margin-top: 20px;
+        height: 60%;
+    }
+    .titledet{
+     font-size: large;
+     color: white;
+     margin-top: 20px;
+    }
+    .autherdet{
+        font-size: large;
+        font-style: oblique;
+    
+        margin-top: 20px;
+   
+    }
+    .buttonidx{
+        margin-top: 20px;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        width: 20%;
+        height: 5%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        
+    }
+    .buttonidx a{
+        text-decoration: none;
+        color:white;
+    }
+    .search{
+        text-align:1.6;
+        text-decoration: none;
+        color: white;
+
+    }
+    .searchbtn{
+        background-color: black;
+        margin-left: 45%;
+        margin-top: 2%;
+        border-radius: 3px;
+        width: 10%;
+        height:5%;
+    }
+    .count{
+        margin-top: 20px;
+        font-weight: bolder;
+    }
+    .buttonshow{
+        margin-top: 20px;
+        width: 150%;
+        height: 80%;
+        border-radius: 3px;
+        background-color: black;
+        color: white;
+    }
     
 /* } */

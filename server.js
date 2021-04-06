@@ -25,7 +25,7 @@ function Book(obj) {
         this.title = obj.title,
         this.author = obj.authors,
         this.description = obj.description || 'there is No description about this book yet !!',
-        this.isbn = (info.industryIdentifiers && info.industryIdentifiers[0].identifier) ? info.industryIdentifiers[0].identifier : 'No ISBN available'
+        this.isbn = (obj.industryIdentifiers && obj.industryIdentifiers[0].identifier) ? obj.industryIdentifiers[0].identifier : 'No ISBN'
 
     }
 //home page reatrive all data form Db done 

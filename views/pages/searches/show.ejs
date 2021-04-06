@@ -16,23 +16,23 @@
         </div>
         <% searchResults.forEach( book=> { %>
             <div class="container">
-                <img src="<%=book.img %>" alt="">
-                <h5><%= book.title %></h5>
-                <h6><%= book.author %></h6>
+                <img  class="imgdet" src="<%=book.img %>" alt="">
+                <h5 class="titledet"><%= book.title %></h5>
+                <h6 class="autherdet"><%= book.author %></h6>
                 <form action="/addFav" method="post">
                     <input type="text" name="title" value="<%=book.title %>" hidden>
                     <input type="text" name="author" value="<%=book.author %>" hidden>
                     <input type="text" name="description" value="<%=book.description %>" hidden>
                     <input type="text" name="isbn" value="<%=book.industryIdentifiers ? book.industryIdentifiers.identifier:'no isbn' %>" hidden>
                     <input type="text" name="imge_url" value="<%=book.img %>" hidden>
-                    <button>Add To Fav</button>
+                    <button class="buttonshow">Add To Fav</button>
                 </form>
             </div>
         <% }) %>
     </main>
-    <footer>
+    <!-- <footer>
         <%- include('../../layout/footer') %> 
-    </footer>
+    </footer> -->
 </body>
 
 </html>
