@@ -2,15 +2,21 @@
 <html lang="en">
 
 <head>
-    <title>Error Page !!</title>
+    <%- include('./layout/head') %> 
 </head>
 
 <body>
+    <header>
+        <%- include('./layout/header') %> 
+    </header>
     <main>
         <h3>
             <%= err %>
         </h3>
     </main>
+    <footer>
+        <%- include('./layout/footer') %> 
+    </footer>
 </body>
 
 </html>
