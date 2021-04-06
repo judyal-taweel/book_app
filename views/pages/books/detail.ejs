@@ -2,17 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Book</title>
-    <link rel="stylesheet" href="/style/showEjsTest.css">
+    <%- include('../../layout/head') %> 
 </head>
 
 <body>
     <header>
-        <h1>Best Books!</h1>
-        <button>Show</button>
+        <%- include('../../layout/header') %> 
     </header>
     <main>
         <div class="serach-head">
@@ -24,13 +19,14 @@
                 <h5><%= data.title %></h5>
                 <h6><%= data.author %></h6>
                 <p><%= data.description %></p>
+                <a href="/update/<%=data.id %>">Update</a>
+                <form action="/delete/<%=data.id %>?_method=DELETE" method="post">
+                <button>delete</button>
+                </form>
             </div>
     </main>
     <footer>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <%- include('../../layout/footer') %> 
     </footer>
 </body>
 

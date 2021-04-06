@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodoverride = require('method-override');
 const app = express();
 const client = new pg.Client(process.env.DATABASE_URL);
 
@@ -15,15 +16,16 @@ client.connect().then(() => {
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
-
+app.use(methodoverride('_method'));
 app.use(express.static(__dirname + '/public'));
+
 function Book(obj) {
     console.log(obj.industryIdentifiers ? obj.industryIdentifiers[0].identifier: 'kdkdk');
     this.img = obj.imageLinks ? obj.imageLinks.thumbnail.replace('http', 'https') : 'https://i.imgur.com/J5LVHEL.jpg',
         this.title = obj.title,
         this.author = obj.authors,
         this.description = obj.description || 'there is No description about this book yet !!',
-        this.isbn = obj.industryIdentifiers ? obj.industryIdentifiers[0].identifier: 'No isbn'
+        this.isbn = (info.industryIdentifiers && info.industryIdentifiers[0].identifier) ? info.industryIdentifiers[0].identifier : 'No ISBN available'
 
     }
 //home page reatrive all data form Db done 
@@ -34,6 +36,14 @@ app.get('/', (req, res) => {
         res.render('pages/index',{result:result.rows,count:result.rowCount});
     })
 });
+
+app.get('/update/:id', (req, res) => {
+    let sql = `SELECT * FROM books WHERE id=$1`
+    client.query(sql, [req.params.id]).then(result => {
+        res.render('pages/books/update', { data: result.rows[0] });
+    }).catch(err => console.log('Error While Retriving the book', err))
+});
+
 
 //part  2 select specific one 
 app.get('/books/:id',(req,res)=>{
@@ -56,6 +66,26 @@ app.post('/addFav', (req, res) => {
     client.query(sql, values).then((result) => {
     }).catch(err=>console.log('ERRRRRRRRRRROR'));
     res.redirect('/');
+})
+
+app.put('/update/:id', (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    console.log(req.body);
+    const { title, author, description } = req.body;
+    let sql = `UPDATE books SET title=$1, author=$2,description=$3 WHERE id=$4`;
+    let values = [title,author,description,id];
+    console.log(req.body.description);
+    client.query(sql,values).then(data=>{
+        res.redirect(`/books/${id}`);
+    }).catch(err=> console.log('update went wroung !!',err))
+
+
+});
+app.delete('/delete/:id',(req,res)=>{
+    const id =req.params.id;
+    let sql = `DELETE FROM books WHERE id=$1`;
+    client.query(sql,[id]).then(res.redirect('/')).catch(err=>console.log('ERROR While DELETE ',err))
 })
 
 

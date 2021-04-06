@@ -1,4 +1,4 @@
-@media only screen and (max-width: 480px){
+/* @media only screen and (max-width: 480px){ */
     body{
         height: 660px;
         width: 100%;
@@ -54,6 +54,10 @@
         padding: 10px;
         border-radius: 3px;
 
+    }
+    textarea{
+        padding: 10px;
+        border-radius: 3px;
     }
     label{
         padding: 10px;
@@ -140,4 +144,20 @@
         text-align: center;
         font-size: x-large;
     }
-}
+    .updateIn{
+        margin: 20px;
+        width: 500px;
+    }
+    .button{
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        width: 20%;
+        height: 20%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: relative;
+        left: 195px;
+    }
+    
+/* } */
