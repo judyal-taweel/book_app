@@ -257,5 +257,8 @@
         background-color: black;
         color: white;
     }
-    
+    .logo{
+        text-decoration: none;
+        color:white;
+    }
 /* } */

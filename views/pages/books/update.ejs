@@ -13,20 +13,7 @@
         <div class="serach-head">
             <h3>Search Result</h3>
         </div>
-        </div>
-        <div id="update-form" class="container">
-            <form class="form" action="/update/<%= data.id%>?_method=PUT" method="post">
-                <!-- <label>Title</label> -->
-                <input class="updateIn" type="text" placeholder="title" name='title' value="<%= data.title %>">
-                <!-- <label>Author</label> -->
-                <input class="updateIn" type="text" placeholder="author" name='author' value="<%= data.author %>">
-                <!-- <label>Description</label> -->
-                <textarea class="updateIn" name="description" placeholder="description" cols="30" rows="10">
-                    <%= data.description %>
-                </textarea>
-                <button class="button">Update</button>
-            </form>
-        </div>
+        <%- include('../../layout/edit') %>
     </main>
     <footer>
         <%- include('../../layout/footer') %> 
