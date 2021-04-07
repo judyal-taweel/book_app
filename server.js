@@ -30,15 +30,16 @@ function Book(obj) {
     }
 //home page reatrive all data form Db done 
 app.get('/', (req, res) => {
-    let sql = 'SELECT * FROM books';
-    client.query(sql).then((result)=>{
-        // console.log(result.rowCount);
-        res.render('pages/index',{result:result.rows,count:result.rowCount});
+    let sql = 'SELECT books.id, AUTHORS.name ,books.title,books.description ,books.imge_url FROM books join AUTHORS on books.author_id = AUTHORS.id';
+    client.query(sql).then((result) => {
+        console.log(result.rows);
+        
+        res.render('pages/index', { result: result.rows, count: result.rowCount });
     })
 });
 
 app.get('/update/:id', (req, res) => {
-    let sql = `SELECT * FROM books WHERE id=$1`
+    let sql = `SELECT books.id, AUTHORS.name ,books.title,books.description ,books.imge_url FROM books join AUTHORS on books.author_id = AUTHORS.id WHERE books.id=$1`
     client.query(sql, [req.params.id]).then(result => {
         res.render('pages/books/update', { data: result.rows[0] });
     }).catch(err => console.log('Error While Retriving the book', err))
@@ -46,11 +47,14 @@ app.get('/update/:id', (req, res) => {
 
 
 //part  2 select specific one 
-app.get('/books/:id',(req,res)=>{
-    let sql = `SELECT * FROM books WHERE id=$1`
-    client.query(sql,[req.params.id]).then(result=>{
-        res.render('pages/books/detail',{data:result.rows[0]});
-    }).catch(err=>console.log('Error While Retriving the book',err))
+//part  2 select specific one 
+app.get('/books/:id', (req, res) => {
+    console.log(req.params.id);
+    let sql = `SELECT books.id, AUTHORS.name ,books.title,books.description ,books.imge_url FROM books join AUTHORS on books.author_id = AUTHORS.id WHERE books.id=$1`
+    client.query(sql, [req.params.id]).then(result => {
+        console.log(result.rows);
+        res.render('pages/books/detail', { data: result.rows[0] });
+    }).catch(err => console.log('Error While Retriving the book', err))
 });
 
 app.get('/search/new', (req, res) => res.render('pages/searches/new'));
@@ -60,11 +64,26 @@ app.post('/searches', createSearch);
 
 
 app.post('/addFav', (req, res) => {
-    let sql = `INSERT INTO books (author,title,isbn,imge_url,description) VALUES ($1,$2,$3,$4,$5) RETURNING * `;
-    let values = [req.body.author, req.body.title, req.body.isbn, req.body.imge_url, req.body.description];
-    
-    client.query(sql, values).then((result) => {
-    }).catch(err=>console.log('ERRRRRRRRRRROR'));
+    let author = req.body.author;
+    let sql2 = `SELECT * from AUTHORS WHERE name=$1`;
+    let sql = `INSERT INTO books (author_id,title,isbn,imge_url,description) VALUES ($1,$2,$3,$4,$5) RETURNING * `;
+    let newAutour = `INSERT INTO authors(name) VALUES ($1) RETURNING *`;
+
+    client.query(sql2, [author]).then(data => {
+        console.log(data.rows);
+        if (data.rows.length > 0) {
+            let values = [data.rows[0].id, req.body.title, req.body.isbn, req.body.imge_url, req.body.description];
+            client.query(sql, values).then((result) => {
+            }).catch(err => console.log('ERRRRRRRRRRROR',err));
+        } else {
+            console.log(newAutour);
+            client.query(newAutour, [author]).then(data2 => {
+                let newAutid=data2.rows[0].id;
+                client.query(sql,[newAutid,req.body.title, req.body.isbn, req.body.imge_url, req.body.description]).then((result) => {
+                }).catch(err => console.log('ERROR while adding the authour to DBD'));
+            }).catch(err => console.log('ELSE ',err))
+        }
+    }).catch(err => console.log('ERROR in sql 2',err))
     res.redirect('/');
 })
 
@@ -72,13 +91,13 @@ app.put('/update/:id', (req, res) => {
     const id = req.params.id;
     console.log(id);
     console.log(req.body);
-    const { title, author, description } = req.body;
-    let sql = `UPDATE books SET title=$1, author=$2,description=$3 WHERE id=$4`;
-    let values = [title,author,description,id];
+    const { title, description } = req.body;
+    let sql = `UPDATE books SET title=$1,description=$2 WHERE id=$3`;
+    let values = [title,  description, id];
     console.log(req.body.description);
-    client.query(sql,values).then(data=>{
+    client.query(sql, values).then(data => {
         res.redirect(`/books/${id}`);
-    }).catch(err=> console.log('update went wroung !!',err))
+    }).catch(err => console.log('update went wroung !!', err))
 
 
 });

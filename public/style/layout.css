@@ -87,10 +87,13 @@
     footer{
         height: 50px;
         background-color: black;
-        clear: both;
+        /* clear: both; */
         margin-top: 60%;
         display: flex;
         align-items: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
     footer div{
         width: 20px;
